@@ -1,22 +1,19 @@
 pipeline {
-  agent none
-
-  environment {
-    IMAGE = "liatrio/petclinic-tomcat"
-  }
-
-  stages {
-
-    stage('Build') {
-      agent {
-        docker {
-          image 'maven:3.5.0'
-          args '-e INITIAL_ADMIN_USER -e INITIAL_ADMIN_PASSWORD --network=${LDOP_NETWORK_NAME}'
-        }
-      }
-      steps {
-        configFileProvider([configFile(fileId: 'nexus', variable: 'MAVEN_SETTINGS')]) {
-          sh 'mvn -s $MAVEN_SETTINGS clean deploy -DskipTests=true -B'
-        }
-      }
+    agent any
+    tools {
+        jdk 'jdk8'
+        maven 'maven3'
     }
+    stages {
+        stage('Install') {
+            steps {
+                sh "mvn -U clean"
+            }
+            post {
+                always {
+                    junit '**/target/*-reports/TEST-*.xml'
+                }
+            }
+        }
+    }
+}
