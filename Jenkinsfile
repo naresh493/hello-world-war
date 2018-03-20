@@ -33,6 +33,8 @@ pipeline {
       junit 'target/**/*.xml'
       cucumber '**/*.json'
     }
+  }
+}
   //  success {
   //    withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
   //      sh "docker login -u ${USERNAME} -p ${PASSWORD}"
@@ -40,5 +42,5 @@ pipeline {
   //      sh "docker push snscaimito/ledger-service:latest"
   //    }
    // }
-  }
-}
+ // }
+//}
