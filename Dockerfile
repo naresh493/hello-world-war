@@ -1,8 +1,4 @@
-# Pull base image
-From tomcat:8-jre8
-
-# Maintainer
-MAINTAINER "naresh.bogathi@capgemini.com">
-
-# Copy to images tomcat path
-ADD hello-world-war-1.0.0.war /usr/local/tomcat/webapps/
+FROM anapsix/alpine-java
+LABEL maintainer="naresh.bogathi"
+COPY /target/spring-petclinic-1.5.1.jar /home/spring-petclinic-1.5.1.jar
+CMD ["java","-jar","/home/spring-petclinic-1.5.1.jar"]
