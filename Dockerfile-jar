@@ -1,0 +1,4 @@
+FROM anapsix/alpine-java
+LABEL maintainer="naresh.bogathi"
+COPY /target/xxxxxxxxxxxxxx.jar /home/xxxxxxxxxxxx.jar
+CMD ["java","-jar","/home/xxxxxxxxxxxxxx.jar"]
