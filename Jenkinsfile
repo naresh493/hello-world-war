@@ -18,23 +18,24 @@ pipeline {
       sh "docker tag naresh/helloworld-war:${env.BUILD_ID} naresh/helloworld-war:latest"
       }
     }
-    
+   } 
+  }
   //  stage('Check Specification') {
   //    steps {
    //     sh "chmod o+w *"
    //     sh "docker-compose up --exit-code-from cucumber --build"
    //   }
    // }
-  }
+ // }
 
-  post {
-    always {
-      archive 'target/**/*.jar'
-      junit 'target/**/*.xml'
-      cucumber '**/*.json'
-    }
-  }
-}
+ // post {
+ //   always {
+ //     archive 'target/**/*.jar'
+ //     junit 'target/**/*.xml'
+ //     cucumber '**/*.json'
+ //   }
+ // }
+//}
   //  success {
   //    withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
   //      sh "docker login -u ${USERNAME} -p ${PASSWORD}"
