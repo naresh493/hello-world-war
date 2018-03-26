@@ -21,10 +21,6 @@ pipeline {
 	
 	stage("init") {
       steps {
-        script {
-          def dateFormat = new SimpleDateFormat("yy.MM.dd")
-          currentBuild.displayName = dateFormat.format(new Date()) + "-" + env.BUILD_NUMBER
-        }
         withCredentials([usernamePassword(
           credentialsId: "docker",
           usernameVariable: "caprearch",
