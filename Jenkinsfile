@@ -19,7 +19,7 @@ pipeline {
       }
     }
 	
-	stage("init") {
+	stage("Docker publish") {
       steps {
        // withCredentials([usernamePassword(
        //   usernameVariable: "caprearch",
