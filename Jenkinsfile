@@ -6,20 +6,37 @@ pipeline {
   }
 
   stages {
-    stage('Build') {
+    stage('Maven Build') {
       steps {
         sh 'mvn package'
       }
     }
     
-    stage('Make Container') {
+    stage('Docker Build') {
       steps {
-      sh "docker build -t naresh/helloworld-war:${env.BUILD_ID} ."
-      sh "docker tag naresh/helloworld-war:${env.BUILD_ID} naresh/helloworld-war:latest"
+      sh "docker build -t caprearch/helloworld-war:${env.BUILD_ID} ."
+      sh "docker tag caprearch/helloworld-war:${env.BUILD_ID} caprearch/helloworld-war:latest"
       }
     }
+	
+	stage('Docker Push') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'caprearch', passwordVariable: 'caprearch', usernameVariable: 'caprearch')]) {
+          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'docker push caprearch/helloworld-war:latest'
+        }
+      }
+    }
+	
    } 
   }
+  
+  
+  
+  
+  ###feature####
+  
+  
   //  stage('Check Specification') {
   //    steps {
    //     sh "chmod o+w *"
