@@ -21,7 +21,7 @@ pipeline {
 	
 	stage('Docker Push') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'caprearch', passwordVariable: 'caprearch', usernameVariable: 'naresh.bogathi@capgemini.com')]) {
+        withCredentials([usernamePassword(credentialsId: 'naresh.bogathi@capgemini.com', passwordVariable: 'caprearch', usernameVariable: 'caprearch')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           sh 'docker push caprearch/helloworld-war:latest'
         }
