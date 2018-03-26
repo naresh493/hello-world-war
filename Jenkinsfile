@@ -22,7 +22,6 @@ pipeline {
 	stage("init") {
       steps {
         withCredentials([usernamePassword(
-          credentialsId: "docker",
           usernameVariable: "caprearch",
           passwordVariable: "caprearch"
         )]) {
