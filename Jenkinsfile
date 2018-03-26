@@ -19,11 +19,19 @@ pipeline {
       }
     }
 	
-	stage('Docker Push') {
+	stage("init") {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'naresh.bogathi@capgemini.com', passwordVariable: 'caprearch', usernameVariable: 'caprearch')]) {
-          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push caprearch/helloworld-war:latest'
+        script {
+          def dateFormat = new SimpleDateFormat("yy.MM.dd")
+          currentBuild.displayName = dateFormat.format(new Date()) + "-" + env.BUILD_NUMBER
+        }
+        withCredentials([usernamePassword(
+          credentialsId: "docker",
+          usernameVariable: "caprearch",
+          passwordVariable: "caprearch"
+        )]) {
+          sh "docker login -u $USER -p $PASS"
+		  sh 'docker push caprearch/helloworld-war:${env.BUILD_ID}'
         }
       }
     }
