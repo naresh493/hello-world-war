@@ -21,13 +21,12 @@ pipeline {
 	
 	stage("init") {
       steps {
-        withCredentials([usernamePassword(
-          usernameVariable: "caprearch",
-          passwordVariable: "caprearch"
-        )]) {
-          sh "docker login -u $USER -p $PASS"
+       // withCredentials([usernamePassword(
+       //   usernameVariable: "caprearch",
+       //   passwordVariable: "caprearch")]) 
+          sh "docker login -u 'caprearch' -p 'caprearch'
 		  sh 'docker push caprearch/helloworld-war:${env.BUILD_ID}'
-        }
+       
       }
     }
 	
