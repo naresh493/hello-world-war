@@ -24,8 +24,8 @@ pipeline {
        // withCredentials([usernamePassword(
        //   usernameVariable: "caprearch",
        //   passwordVariable: "caprearch")]) 
-          sh "docker login -u 'caprearch' -p 'caprearch'
-		  sh 'docker push caprearch/helloworld-war:${env.BUILD_ID}'
+          sh "docker login -u 'caprearch' -p 'caprearch'"
+		  sh "docker push caprearch/helloworld-war:${env.BUILD_ID}"
        
       }
     }
