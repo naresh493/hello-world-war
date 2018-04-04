@@ -17,7 +17,7 @@ pipeline {
       sh "docker build -t caprearch/helloworld-war:${env.BUILD_ID} ."
       sh "docker tag caprearch/helloworld-war:${env.BUILD_ID} caprearch/helloworld-war:latest"
 	  sh "docker service ls"
-	  //sh "docker service rm helloworld-war"
+	  sh "docker service rm helloworld-war"
 	  sh "docker service create --name helloworld-war --replicas 1 --publish 9797:9797 caprearch/helloworld-war:${env.BUILD_ID}"
 	  sh "docker service ls"
 	  
