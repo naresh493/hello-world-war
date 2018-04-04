@@ -22,10 +22,17 @@ pipeline {
 	
 	stage('Docker Deployment') {
       steps {
-	  sh "docker service ls"
-	  sh "docker service rm helloworld-war"
-	  sh "docker service create --name helloworld-war --replicas 1 --publish 9797:9797 caprearch/helloworld-war:${env.BUILD_ID}"
-	  sh "docker service ls"
+	  file=helloworld-war
+		if  test -s $file
+		 then 
+			echo "found one"
+		else 
+			echo "found none"
+		fi
+	 // sh "docker service ls"
+	//  sh "docker service rm helloworld-war"
+	//  sh "docker service create --name helloworld-war --replicas 1 --publish 9797:9797 caprearch/helloworld-war:${env.BUILD_ID}"
+	//  sh "docker service ls"
 	  
       }
     }
