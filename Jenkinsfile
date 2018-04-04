@@ -23,7 +23,7 @@ pipeline {
 	stage('Docker Deployment') {
 					steps {
 							script{					
-							if(sh "docker service ls ${sh "docker service ls --quiet --filter name=helloworld-war"}"){
+							if((sh "docker service ls --quiet --filter name=helloworld-war")== null){
 							  echo "create"
 							}else{
 							  echo " remove"		
