@@ -22,9 +22,13 @@ pipeline {
 	
 	stage('Docker Deployment') {
 					steps {
-							id=sh "docker service ls --quiet --filter name=helloworld-war"					
-							sh "docker service ls ${id}"
-					
+												
+							if(sh "docker service ls ${sh "docker service ls --quiet --filter name=helloworld-war"}"){
+							  echo "create"
+							}else{
+							  echo " remove"		
+							}
+		
 						
 					}
 	
