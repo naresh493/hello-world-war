@@ -22,9 +22,9 @@ pipeline {
 	
 	stage('Docker Deployment') {
 					steps {
-						environment {							
+												
 							sh "docker service ls ${sh "docker service ls --quiet --filter name=helloworld-war"}"
-						}
+					
 						
 					}
 	
