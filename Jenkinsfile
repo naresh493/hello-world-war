@@ -23,14 +23,14 @@ pipeline {
 	stage('Docker Deployment') {
 					steps {
 						environment {
-							service = sh(script: "docker service ls --quiet --filter name=${helloworld-war}", returnStdout: true).trim()
+							service = sh(script: "docker service ls --quiet --filter name='helloworld-war'", returnStdout: true).trim()
 						
 						}
 						steps {
 							if (service.isEmpty()) {
 								sh "docker service create --name helloworld-war --replicas 1 --publish 9797:9797 caprearch/helloworld-war:${env.BUILD_ID}"
 							}else{
-							 sh "docker service rm helloworld-war"
+							 sh "docker service rm ${service}"
 							}
 						}
 					}
