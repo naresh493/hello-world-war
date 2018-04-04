@@ -22,8 +22,8 @@ pipeline {
 	
 	stage('Docker Deployment') {
 					steps {
-												
-							sh "docker service ls ${sh "docker service ls --quiet --filter name=helloworld-war"}"
+							id=sh "docker service ls --quiet --filter name=helloworld-war"					
+							sh "docker service ls ${id}"
 					
 						
 					}
