@@ -23,8 +23,7 @@ pipeline {
 	stage('Docker Deployment') {
 					steps {
 						environment {
-							service = sh(script: "docker service ls --quiet --filter name='helloworld-war'", returnStdout: true).trim()
-						
+							service = sh(script: "docker service ls --quiet --filter name=helloworld-war", returnStdout: true).trim()
 						}
 						steps {
 							if (service.isEmpty()) {
