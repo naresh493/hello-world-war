@@ -35,12 +35,12 @@ pipeline {
       }
     }
 	
-	 stage('Push image') {
-      docker.withRegistry('http://10.108.195.171:1111/nexus/repository/dockerimg/', 'nexus') {
-        container.push("${shortCommit}")
-        container.push('latest')
-      }
-    }
+	// stage('Push image') {
+  //    docker.withRegistry('http://10.108.195.171:1111/nexus/repository/dockerimg/', 'nexus') {
+  //      container.push("${shortCommit}")
+  //      container.push('latest')
+  //   }
+  //  }
 	
    } 
   }
