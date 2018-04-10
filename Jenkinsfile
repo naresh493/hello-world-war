@@ -20,36 +20,36 @@ pipeline {
       }
     }
 	
-	//stage('Docker Deployment') {
-	//steps {
-        stage('Parallel Stage') {
-            failFast true
-            parallel {
-                stage('Remove continer') {
-                    agent {
-                        label "helloworld"
-                    }
-                    steps {
-                        echo "On Branch A"
-                    }
-                }
-                stage('Create continer') {
-                    agent {
-                        label "helloworld"
-                    }
-                    steps {
-                        echo "On Branch B"
-                    }
-                }
-            }
-        } 
-	 // sh "docker service ls"
-	 // sh "docker service rm helloworld-war"
-	 // sh "docker service create --name helloworld-war --replicas 1 --publish 9797:9797 caprearch/helloworld-war:${env.BUILD_ID}"
-	 // sh "docker service ls"
+	stage('Docker Deployment') {
+	steps {
+    //    stage('Parallel Stage') {
+    //        failFast true
+    //        parallel {
+    //            stage('Remove continer') {
+     //               agent {
+     //                   label "helloworld"
+     //               }
+      //              steps {
+      //                  echo "On Branch A"
+      //              }
+       //         }
+       //         stage('Create continer') {
+         //           agent {
+       //                 label "helloworld"
+       //             }
+        //            steps {
+        //                echo "On Branch B"
+        //            }
+        //        }
+        //    }
+       // } 
+	  sh "docker service ls"
+	  sh "docker service rm helloworld-war"
+	  sh "docker service create --name helloworld-war --replicas 1 --publish 9797:9797 caprearch/helloworld-war:${env.BUILD_ID}"
+	  sh "docker service ls"
 	  		
-//		} 
- //   }
+		} 
+    }
 	
 	stage("Docker publish") {
       steps {
