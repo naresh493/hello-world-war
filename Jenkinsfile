@@ -6,6 +6,19 @@ pipeline {
   }
 
   stages {
+           stage ('Prepare') {
+            steps {
+                checkout([$class: 'GitSCM',
+                    branches: [[name: "origin/master"]],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[$class: 'LocalBranch']],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                        credentialsId: 'naresh493',
+                        url: 'https://github.com/naresh493/hello-world-war.git']]])
+            }
+        }
+  
     stage('Maven Build') {
       steps {
         sh 'mvn package'
